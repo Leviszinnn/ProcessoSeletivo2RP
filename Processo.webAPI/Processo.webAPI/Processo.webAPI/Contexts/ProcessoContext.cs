@@ -36,7 +36,7 @@ namespace Processo.webAPI.Contexts
             modelBuilder.Entity<TipoUsuario>(entity =>
             {
                 entity.HasKey(e => e.IdTipo)
-                    .HasName("PK__TipoUsua__9E3A29A581D9DF24");
+                    .HasName("PK__TipoUsua__9E3A29A583FBF36D");
 
                 entity.ToTable("TipoUsuario");
 
@@ -48,7 +48,7 @@ namespace Processo.webAPI.Contexts
             modelBuilder.Entity<Usuario>(entity =>
             {
                 entity.HasKey(e => e.IdUsuario)
-                    .HasName("PK__Usuarios__5B65BF978C1ADB06");
+                    .HasName("PK__Usuarios__5B65BF973A343C56");
 
                 entity.Property(e => e.Email)
                     .HasMaxLength(30)
@@ -59,13 +59,13 @@ namespace Processo.webAPI.Contexts
                     .IsUnicode(false);
 
                 entity.Property(e => e.Senha)
-                    .HasMaxLength(30)
+                    .HasMaxLength(100)
                     .IsUnicode(false);
 
                 entity.HasOne(d => d.IdTipoNavigation)
                     .WithMany(p => p.Usuarios)
                     .HasForeignKey(d => d.IdTipo)
-                    .HasConstraintName("FK__Usuarios__IdTipo__4BAC3F29");
+                    .HasConstraintName("FK__Usuarios__IdTipo__5EBF139D");
             });
 
             OnModelCreatingPartial(modelBuilder);

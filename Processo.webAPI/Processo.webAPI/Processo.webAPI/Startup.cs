@@ -85,19 +85,19 @@ namespace Processo.webAPI
                    options.DefaultAuthenticateScheme = "JwtBearer";
                    options.DefaultChallengeScheme = "JwtBearer";
                })
+               .AddJwtBearer("JwtBearer", options => {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("Processo2rp-chave-autenticacao")),
+                        ClockSkew = TimeSpan.FromMinutes(30),
+                        ValidIssuer = "Processo.webAPI",
+                        ValidAudience = "Processo.webAPI"
+                    };
+               });
 
-           .AddJwtBearer("JwtBearer", options => {
-               options.TokenValidationParameters = new TokenValidationParameters
-               {
-                   ValidateIssuer = true,
-                   ValidateAudience = true,
-                   ValidateLifetime = true,
-                   IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("Processo2rp-chave-autenticacao")),
-                   ClockSkew = TimeSpan.FromHours(1),
-                   ValidIssuer = "Processo.webAPI",
-                   ValidAudience = "Processo.webAPI"
-               };
-           });
             services.AddDbContext<ProcessoContext>(options =>
                             options.UseSqlServer(Configuration.GetConnectionString("Default"))
                         );

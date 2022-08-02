@@ -29,7 +29,7 @@ namespace Processo.webAPI.Repositories
 
             if (usuarioAtt.Nome != null)
             {
-                usuarioBuscado.IdTipo = usuarioAtt.IdTipo;
+                usuarioBuscado.Nome = usuarioAtt.Nome;
             }
 
             if (usuarioAtt.Email != null)
