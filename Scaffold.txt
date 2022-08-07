@@ -1,4 +1,4 @@
 Scaffold-DbContext "Data Source=DESKTOP-LEVIxD\SQLEXPRESS; initial catalog=Processo2rp; user Id=sa; pwd=senai@132;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Domains -ContextDir Contexts -Context ProcessoContext
-Camila = 98765
-Roberto = 54321
-Claudio = 12345
+Camila@2rpnet.com   98765
+Roberto@2rpnet.com  54321
+Claudio@2rpnet.com  12345

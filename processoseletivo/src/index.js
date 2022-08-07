@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM from 'react-dom';
 import './index.css';
 import { Route, BrowserRouter as Router, Redirect, Switch } from 'react-router-dom';
 import Login from './pages/Login/Login'
+import Home from './pages/Home/Home'
 import reportWebVitals from './reportWebVitals';
 import { usuarioAutenticado } from './services/Auth';
 
-const privateRoute = ({ component: Component, ...rest }) => (
+const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
   {...rest}
   render={props =>
@@ -24,6 +25,8 @@ const routing = (
     <div>
       <Switch>
         <Route exact path="/" component={Login}/>
+        <PrivateRoute path="/home" component={Home}/>
+        <Redirect to="/notfound"/>
       </Switch>
     </div>
   </Router>
