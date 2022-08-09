@@ -5,7 +5,6 @@ import { React, useState, useEffect } from 'react';
 import { db } from "../../services/Api";
 import axios from "axios";
 import { usuarioAutenticado } from "../../services/Auth";
-import { getAllByRole } from "@testing-library/react";
 
 export default function Home() {
 
@@ -71,17 +70,6 @@ export default function Home() {
         setValor(num)
         carregarUserBuscado()
     }
-
-    const options = [
-        { value: 'geral', label: 'Geral' },
-        { value: 'admin', label: 'Admin' },
-        { value: 'root', label: 'Root' }
-    ]
-
-    const optionsAtivo = [
-        { value: 'ativo', label: 'Ativo' },
-        { value: 'inativo', label: 'inativo' }
-    ]
 
     function telaCadastro() {
         return (
@@ -412,12 +400,12 @@ export default function Home() {
     }
 
     function carregarUserBuscado() {
-
+        console.log(listaMeuUser)
         if (listaMeuUser.status == true) {
             var status = "Ativo";
         }
         else if (listaMeuUser.status == false) {
-            var status = "Inativo"
+            status = "Inativo"
         }
 
         return (
@@ -431,19 +419,16 @@ export default function Home() {
 
     function searchbyID(id) {
         id = getUser()
-        db.get('/buscar/' + id, {
-            headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem('usuario-login')
-            }
-        })
+        db.get('/buscar/' + id)
             .then(resposta => {
                 if (resposta.status === 200) {
-                    console.log(resposta.data)
+                    console.log("a resposta é " + resposta.data)
                     setlistaMeuUser(resposta.data)
                 }
             })
             .catch(erro => console.log(erro));
     }
+
     useEffect(searchbyID, []);
 
 
@@ -483,14 +468,14 @@ export default function Home() {
     function carregarUser() {
         return (
             listaUser.map((user) => {
-                if (user.status == true) {
+                if (user.status === true) {
                     var status = "Ativo";
                 }
-                else if (user.status == false) {
-                    var status = "Inativo"
+                else if (user.status === false) {
+                    status = "Inativo"
                 }
 
-                if (getUser() == "3") {
+                if (getUser() === "3") {
                     return (
                         <tr>
                             <td className="tdobjetos">{user.nome}</td>
@@ -513,6 +498,8 @@ export default function Home() {
             })
         )
     }
+
+    useEffect(carregarUser, []);
 
     function excluir(id) {
         db.delete('/Usuario/' + id, {
