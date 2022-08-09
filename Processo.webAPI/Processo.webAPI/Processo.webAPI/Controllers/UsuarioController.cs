@@ -35,7 +35,7 @@ namespace Processo.webAPI.Controllers
             }
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("/api/buscar/{id}")]
         public IActionResult BuscarporId(int id)
         {
             try
@@ -48,7 +48,6 @@ namespace Processo.webAPI.Controllers
             }
         }
 
-        [Authorize(Roles = "2,3")]
         [HttpPut("{id}")]
         public IActionResult Put(int id, Usuario usuario)
         {

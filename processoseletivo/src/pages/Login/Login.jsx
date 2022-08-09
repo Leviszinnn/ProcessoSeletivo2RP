@@ -34,6 +34,7 @@ export default class Login extends Component {
 
                     this.props.history.push('/home');
                     console.log("funfou")
+                    console.log(resposta.role)
                 }
             })
             .catch(() => {
